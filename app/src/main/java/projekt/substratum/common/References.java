@@ -754,7 +754,9 @@ public class References {
      * @return Is it true that there is an afterlife?
      */
     static boolean spreadYourWingsAndFly(Context context, boolean override) {
-        if (uncertified != null && !override) {
+        uncertified = false;
+        return false;
+        /*if (uncertified != null && !override) {
             return uncertified;
         }
         SharedPreferences prefs = context.getSharedPreferences(FirebaseAnalytics.PACKAGES_PREFS, Context.MODE_PRIVATE);
@@ -770,7 +772,7 @@ public class References {
             }
         }
         uncertified = false;
-        return false;
+        return false;*/
     }
 
     /**
