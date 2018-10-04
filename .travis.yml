@@ -43,7 +43,7 @@ before_script:
   - keytool -genkey -v -keystore app/debug.jks -storepass $STORE_PASSWORD -alias Lawnchair -keypass $KEY_PASSWORD -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
 before_deploy:
-  - "cp app/build/outputs/apk/debug/app-debug.apk Lawnchair-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.apk"
+  - "cp app/build/outputs/apk/debug/app-debug.apk substratum-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.apk"
   - "cp app/build/outputs/mapping/debug/mapping.txt proguard-$TRAVIS_BUILD_NUMBER.txt"
 deploy:
   - provider: releases
