@@ -30,3 +30,25 @@ cache:
 
 before_install:
   - yes | sdkmanager "platforms;android-28"
+  
+# added
+if: tag IS blank
+env:
+  - UPSTREAM_BRANCH=release
+before_script:
+  - git remote add upstream https://github.com/substratum/substratum
+  - git fetch upstream $UPSTREAM_BRANCH
+  - git merge $UPSTREAM_BRANCH
+  - rm -f app/debug.jks
+  - keytool -genkey -v -keystore app/debug.jks -storepass $STORE_PASSWORD -alias Lawnchair -keypass $KEY_PASSWORD -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
+before_deploy:
+  - "cp app/build/outputs/apk/debug/app-debug.apk Lawnchair-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.apk"
+  - "cp app/build/outputs/mapping/debug/mapping.txt proguard-$TRAVIS_BUILD_NUMBER.txt"
+deploy:
+  - provider: releases
+    skip_cleanup: true
+    api_key: $GITHUB_OAUTH_TOKEN
+    file: "Lawnchair-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER.apk"
+    on:
+      all_branches: true
