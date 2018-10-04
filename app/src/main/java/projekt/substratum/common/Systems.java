@@ -592,6 +592,8 @@ public class Systems {
      * @return True if blacklisted packages found
      */
     public static boolean checkPackageSupport(Context context, Boolean override) {
+        return false;
+        /*
         if (checkPackageSupported == null || override) {
             String[] blacklistedPackages = {
                     "com.android.vending.billing.InAppBillingService.",
@@ -607,7 +609,7 @@ public class Systems {
                             spreadYourWingsAndFly(context, override) ||
                             hashPassthrough(context) == 0);
         }
-        return checkPackageSupported;
+        return checkPackageSupported;*/
     }
 
     /**
